@@ -133,20 +133,26 @@ class MonthView extends ListView {
         int y = (((_rowHeight + _monthTextSize) / 2) - DAY_SEPARATOR_WIDTH) + _monthHeaderSize;
         int dayWidthHalf = (_width - _padding * 2) / (_numDays * 2);
         int j = 0;
+
         for (int month = 0; month < _monthNames.length; month++) {
             int x = (2 * j + 1) * dayWidthHalf + _padding;
+
+            final Paint paint;
             if (_selectedMonth == month) {
                 canvas.drawCircle(x, y - (_monthTextSize / 3), _monthSelectedCircleSize, _monthNumberSelectedPaint);
-                if (_monthFontColorSelected != 0)
-                    _monthNumberPaint.setColor(_monthFontColorSelected);
+
+                paint = new Paint(_monthNumberPaint);
+                if (_monthFontColorSelected != 0) {
+                    paint.setColor(_monthFontColorSelected);
+                }
+            } else if (month < _minMonth || month > _maxMonth) {
+                paint = _monthNumberDisabledPaint;
             } else {
-                if (_monthFontColorNormal != 0)
-                    _monthNumberPaint.setColor(_monthFontColorNormal);
+                paint = _monthNumberPaint;
             }
 
-            final Paint paint = (month < _minMonth || month > _maxMonth) ?
-                    _monthNumberDisabledPaint : _monthNumberPaint;
             canvas.drawText(_monthNames[month], x, y, paint);
+
             j++;
             if (j == _numDays) {
                 j = 0;

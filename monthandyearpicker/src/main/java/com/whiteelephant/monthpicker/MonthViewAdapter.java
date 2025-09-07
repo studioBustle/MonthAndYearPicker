@@ -58,6 +58,9 @@ class MonthViewAdapter extends BaseAdapter {
             v.setClickable(true);
             v.setOnMonthClickListener(mOnDayClickListener);
         }
+        // ✅ 항상 colors 다시 설정
+        v.setColors(_colors);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // If we're running on Honeycomb or newer, then we can use the Theme's
             // selectableItemBackground to ensure that the View has a pressed state

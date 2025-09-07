@@ -193,6 +193,8 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
 
     public static class Builder {
 
+        private HashMap<String, Integer> _themeColors;
+
         private static final String TAG = MonthPickerDialog.Builder.class.getName();
         private Context _context;
         private OnDateSetListener _callBack;
@@ -205,6 +207,11 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
         private OnYearChangedListener _onYearChanged;
         private OnMonthChangedListener _onMonthChanged;
 
+
+        public Builder setThemeColors(HashMap<String, Integer> themeColors) {
+            this._themeColors = themeColors;
+            return this;
+        }
 
         /**
          * Build a Dialog with month and year with given context.
@@ -504,6 +511,11 @@ public class MonthPickerDialog extends AlertDialog implements OnClickListener, O
 
             monthPickerDialog = new MonthPickerDialog(_context, _callBack, _activatedYear,
                     _activatedMonth);
+
+            if (_themeColors != null) {
+                monthPickerDialog.getDatePicker().setThemeColors(_themeColors);
+            }
+
             if (monthOnly) {
                 monthPickerDialog.showMonthOnly();
                 _minYear = 0;
