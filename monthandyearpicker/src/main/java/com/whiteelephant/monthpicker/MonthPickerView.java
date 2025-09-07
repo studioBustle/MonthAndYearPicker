@@ -433,4 +433,9 @@ class MonthPickerView extends FrameLayout {
         configChangeListener.onConfigChange();
         super.onConfigurationChanged(newConfig);
     }
+
+    public void setThemeColors(HashMap<String, Integer> map) {
+        _monthViewAdapter.setColors(map);
+        _yearView.setColors(map);
+    }
 }
